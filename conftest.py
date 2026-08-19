@@ -29,7 +29,7 @@ def generate_valid_password():
     # Заглавная буква
     # Строчная буква
     # Цифра
-    # Спецсимвол из ['$','~','-','_']
+    # Спецсимвол из ["@","$","#","^","&","*","!"] - согласно документации
     uppercase = random.choice(string.ascii_uppercase)
     #ascii_uppercase — это заранее заготовленная строка внутри встроенной библиотеки string.
     #то есть грубо говоря - random.choice("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
