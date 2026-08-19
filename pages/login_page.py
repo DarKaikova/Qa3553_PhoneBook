@@ -1,4 +1,7 @@
+from selenium.common import NoSuchElementException, TimeoutException
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support.wait import WebDriverWait
 
 
 class LoginPage:
@@ -28,3 +31,21 @@ class LoginPage:
 
     def submit_login(self):
         self.driver.find_element(*self.LOGIN_BTN).click()
+
+    # def is_logged(self): # проверка, удачно ли мы зашли в аккаунт
+    #     try:
+    #         self.driver.find_element(*self.SIGN_OUT_BUTTON)
+    #         return True
+    #     except NoSuchElementException:
+    #         return False
+
+    def is_logged(self):
+        try:
+            WebDriverWait(self.driver, timeout=5).until(
+                expected_conditions.visibility_of_element_located(self.SIGN_OUT_BUTTON)
+                # можно еще написать как EC.visibility_of_element_located
+                # только в случае, когда сверху мы поменяла expected conditions на ec
+            )
+            return True
+        except TimeoutException :
+            return False
