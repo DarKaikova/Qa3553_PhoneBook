@@ -35,7 +35,7 @@ def generate_valid_password():
     #то есть грубо говоря - random.choice("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
     lowercase = random.choice(string.ascii_lowercase)
     digit = random.choice(string.digits)
-    special = random.choice([["@","$","#","^","&","*","!"]])
+    special = random.choice(["@","$","#","^","&","*","!"])
 
     # Добавляем еще несколько случайных букв для длины
     extra_chars = "".join(

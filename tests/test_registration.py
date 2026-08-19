@@ -14,8 +14,6 @@ def test_registration_success(driver):
     reg_page.open_login_form()
     reg_page.fill_email(generate_unique_email())
     reg_page.fill_password(generate_valid_password())
-    #в рандомайзере я проставила совершенно другие спецсимволы (!, @, $),
-    # так как запрашиваемые спецсимволы сайт не принимает
     reg_page.registration()
     time.sleep(2)
 
