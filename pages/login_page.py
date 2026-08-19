@@ -49,3 +49,26 @@ class LoginPage:
             return True
         except TimeoutException :
             return False
+
+
+    def get_alert_text(self):
+        alert = WebDriverWait(self.driver, timeout=5).until(
+            expected_conditions.alert_is_present()
+        )
+
+        return alert.text
+    #Этим методом мы дожидаемся всплывающее окно браузера с предупреждением и
+    #возвращаем текст этого предупреждения
+
+    def accept_alert(self):
+        self.driver.switch_to.alert.accept()
+    #Этот метод принимает (нажимает на кнопку ОК на всплывающем окне)
+
+
+
+
+
+
+
+
+
