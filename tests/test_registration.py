@@ -6,6 +6,8 @@ from pages.regestration_page import RegistrationPage
 
 random_suffix = uuid.uuid4().hex[:8]
 
+VALID_EMAIL = "margo_12346@gmail.com"
+VALID_PASSWORD = "Mmar123456$"
 
 
 def test_registration_success(driver):
