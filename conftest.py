@@ -5,6 +5,10 @@ import string
 import time
 from faker import Faker
 
+from pages.login_page import LoginPage
+from tests.test_login import VALID_PASSWORD
+
+
 @pytest.fixture
 
 def driver():
@@ -47,3 +51,14 @@ def generate_valid_password():
     random.shuffle(password_list)
 
     return "".join(password_list)
+
+
+@pytest.fixture
+def authenticated_driver(driver):
+    login_page = LoginPage(driver)
+    login_page.open_login_form()
+    login_page.fill_email(generate_unique_email())
+    login_page.fill_password(generate_valid_password())
+    login_page.submit_login()
+
+    return driver

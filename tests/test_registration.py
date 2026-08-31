@@ -18,8 +18,10 @@ def test_registration_success(driver):
 
     reg_page.open_login_form()
     reg_page.fill_registration_form(user)
+    time.sleep(4)
     reg_page.registration()
     time.sleep(2)
+
 
     assert reg_page.registration_success_text() == 'Add new by clicking on Add in NavBar!'
 
