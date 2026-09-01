@@ -6,45 +6,36 @@ from selenium.webdriver.support.wait import WebDriverWait
 from pages.base_page import BasePage
 
 
-class LoginPage(BasePage):
-    LOGIN_NAV_LINK = (By.CSS_SELECTOR, "[href='/login']")
+class RegistrationPage(BasePage):
+    REGISTRATION_NAV_LINK = (By.CSS_SELECTOR, "[href='/login']")
     EMAIL_INPUT = (By.CSS_SELECTOR, "input[name='email']")
     PASSWORD_INPUT = (By.CSS_SELECTOR, "input[name='password']")
-    LOGIN_BTN = (By.XPATH, "//button[text()='Login']")
+    REGISTRATION_BTN = (By.XPATH, "//button[text()='Registration']")
     SIGN_OUT_BTN = (By.XPATH,"//*[text()='Sign Out']")
 
     # def __init__(self, driver):
     #     self.driver = driver
 
 
-    def open_login_form(self):
-        # self.driver.find_element(*self.LOGIN_NAV_LINK).click()
-        self.click(self.LOGIN_NAV_LINK)
-
+    def open_registration_form(self):
+        # self.driver.find_element(*self.REGISTRATION_NAV_LINK).click()
+        self.click(self.REGISTRATION_NAV_LINK)
 
     def fill_email(self,email):
         # self.driver.find_element(*self.EMAIL_INPUT).clear()
         # self.driver.find_element(*self.EMAIL_INPUT).send_keys(email)
         self.fill(self.EMAIL_INPUT,email)
 
-
     def fill_password(self, password):
         # self.driver.find_element(*self.PASSWORD_INPUT).clear()
         # self.driver.find_element(*self.PASSWORD_INPUT).send_keys(password)
-        self.fill(self.PASSWORD_INPUT, password)
+        self.fill(self.PASSWORD_INPUT,password)
 
-    def submit_login(self):
-        self.click(self.LOGIN_BTN)
+    def submit_registration(self):
+        # self.driver.find_element(*self.REGISTRATION_BTN).click()
+        self.click(self.REGISTRATION_BTN)
 
-    # def is_logged(self):
-    #     try:
-    #         self.driver.find_element(*self.SIGN_OUT_BTN)
-    #         return True
-    #     except NoSuchElementException:
-    #         return False
-
-
-    def is_logged(self):
+    def is_registered(self):
         try:
             WebDriverWait(self.driver,timeout=5).until(
                 EC.visibility_of_element_located(self.SIGN_OUT_BTN)

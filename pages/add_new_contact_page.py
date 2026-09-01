@@ -1,5 +1,6 @@
-from selenium.webdriver.common.by import By
+import time
 
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
@@ -15,6 +16,7 @@ class ContactPage(BasePage):
     ADDRESS_INPUT = (By.CSS_SELECTOR, "input[placeholder='Address']")
     DESCRIPTION_INPUT = (By.CSS_SELECTOR, "input[placeholder='description']")
     SAVE_BTN = (By.XPATH, "//button[b[text()='Save']]")
+    CONTACT_NAV_LINK = (By.CSS_SELECTOR,"[href='/contacts']")
 
     # def __init__(self, driver):
     #     self.driver = driver
@@ -65,15 +67,9 @@ class ContactPage(BasePage):
         # self.driver.find_element(*self.SAVE_BTN).click()
         self.click(self.SAVE_BTN)
 
-    def contact_card_visible(self, phone):
-        locator = (By.XPATH, f"//h3[text()='{phone}']")
-        element = WebDriverWait(self.driver, 5).until(
-            EC.presence_of_element_located(locator))
-        return element.is_displayed()
 
 
-    def open_contact_details(self,phone):
-        card = self.driver.find_element(By.XPATH, f"//h3[text()='{phone}']/..")
-        card.click()
 
-
+    def is_add_button_active(self):
+        add_link = self.find(self.ADD_NAV_LINK)
+        return "active" in add_link.get_attribute("class")
