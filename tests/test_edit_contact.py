@@ -1,3 +1,5 @@
+import time
+
 import pytest
 from faker import Faker
 
@@ -9,19 +11,25 @@ fake = Faker()
 
 
 def test_edit_contact_name_updated(authenticated_driver):
-    contact_page = ContactPage(authenticated_driver)
-    contacts_page = ContactsPage(authenticated_driver)
+    contact_page = ContactPage(authenticated_driver) # подключаем страницу где заполняем данные нового контака
+    contacts_page = ContactsPage(authenticated_driver) # подключаем страницу где находятся все контакты
 
-    contact = create_contact()
-    contact_page.create_contact_steps(contact)
+    contact = create_contact() # переменная для нового контакта
+    contact_page.create_contact_steps(contact) # мы переходим на страницу заполнения нового контакта,
+    #Происходит следущее:
+    # self.open_contact_form() - открывается форма для нового контакта
+    # self.fill_contact_form(contact) - заполняем форму нового контакта переменной, которую недавно создали
+    # self.submit_contact() - подтверждаем
     new_name = fake.first_name()
 
-    contacts_page.open_contact_details(contact.phone)
+    contacts_page.open_contact_details(contact.phone) # мы открываем карточку контакта по номеру телефона который был у нас в созданной переменной contact
     contacts_page.open_edit_mode()
     contacts_page.set_edit_field(contacts_page.EDIT_NAME_INPUT, new_name)
+    # set_edit_field - это у нас заранее созданная функция включающая fill которая стирает старую информацию
+    # и записывает новую (принимает локатор и на что перезаписать)
     contacts_page.submit_edit()
 
-    assert contacts_page.contact_name_for_phone(contact.phone) == new_name
+    assert contacts_page.contact_name_for_phone(contact.phone) == new_name #проверяем схоже ли имя на карточке с обновленным именем
 
 
 def test_edit_contact_last_name_updated(authenticated_driver):
@@ -231,3 +239,18 @@ def test_edit_contact_duplicate_email_negative(authenticated_driver):
     contacts_page.open_contact_details(other_contact)
     contacts_page.open_edit_mode()
     assert contacts_page.get_edit_contact(contacts_page.EDIT_EMAIL_INPUT) == other_contact.email
+
+
+
+def test_remove_contact(authenticated_driver):
+    contact_page = ContactPage(authenticated_driver)
+    contacts_page = ContactsPage(authenticated_driver)
+
+    contact = create_contact()
+    contact_page.create_contact_steps(contact)
+
+    contacts_page.open_contact_details(contact.phone)
+    contacts_page.remove()
+    time.sleep(3)
+
+    assert contacts_page.contact_cards_count(contact.phone) == 0

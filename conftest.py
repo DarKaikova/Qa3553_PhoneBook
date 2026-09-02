@@ -22,7 +22,7 @@ def authenticated_driver(driver):
     login_page = LoginPage(driver)
     user = exiting_user()
     login_page.open_login_form()
-    login_page.fill_email(user.username)
+    login_page.fill_email(user.email)
     login_page.fill_password(user.password)
     login_page.submit_login()
 

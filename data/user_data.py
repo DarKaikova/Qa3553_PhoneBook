@@ -5,25 +5,25 @@ from models.user import User
 fake = Faker()
 
 
-def create_user(username=None, password=None):
+def create_user(email=None, password=None):
     return User(
-        username=username if username is not None else fake.unique.email(),
+        email=email if email is not None else fake.unique.email(),
         password=password if password is not None else fake.password(
             length=12, special_chars=True, digits=True, upper_case=True, lower_case=True
         )
     )
 
-EXISTING_USER_EMAIL = "dariamos@gmail.com"
-EXISTING_USER_PASSWORD = "Ddar1256$!"
+EXISTING_USER_EMAIL = "darion@gmail.com"
+EXISTING_USER_PASSWORD = "Ddar126$!"
 INVALID_EMAIL = "darigmail.com"
 INVALID_PASSWORD = "Ddar123"
 
 
 def exiting_user():
-    return create_user(username=EXISTING_USER_EMAIL, password=EXISTING_USER_PASSWORD)
+    return create_user(email=EXISTING_USER_EMAIL, password=EXISTING_USER_PASSWORD)
 
 def invalid_email_user():
-    return create_user(username=INVALID_EMAIL, password=EXISTING_USER_PASSWORD)
+    return create_user(email=INVALID_EMAIL, password=EXISTING_USER_PASSWORD)
 
 def invalid_password_user():
-    return create_user(username=EXISTING_USER_EMAIL, password=INVALID_PASSWORD)
+    return create_user(email=EXISTING_USER_EMAIL, password=INVALID_PASSWORD)
