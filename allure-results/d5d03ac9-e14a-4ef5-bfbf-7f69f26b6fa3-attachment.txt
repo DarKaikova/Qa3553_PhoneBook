@@ -1,0 +1,4 @@
+2026-10-08 20:10:21,360-INFO-conftest-Starting browser session
+2026-10-08 20:10:23,997-INFO-tests.test_login-Testing rejected login: case = create_user, username = solomonmartin@example.net
+2026-10-08 20:10:23,998-INFO-pages.login_page-Opening login form
+2026-10-08 20:10:25,693-INFO-conftest-Closing browser session

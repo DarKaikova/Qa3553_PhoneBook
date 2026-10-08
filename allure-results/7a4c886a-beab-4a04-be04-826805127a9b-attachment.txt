@@ -1,0 +1,4 @@
+2026-10-08 20:10:06,917-INFO-conftest-Starting browser session
+2026-10-08 20:10:11,513-INFO-tests.test_login-Testing successful login: username=doritos654@gmail.com, password=Ddas!223466
+2026-10-08 20:10:11,517-INFO-pages.login_page-Opening login form
+2026-10-08 20:10:12,990-INFO-conftest-Closing browser session
